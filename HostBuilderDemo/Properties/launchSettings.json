@@ -3,6 +3,12 @@
     "HostBuilderDemo": {
       "commandName": "Project",
       "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Production"
+      }
+    },
+    "HostBuilderDemoDev": {
+      "commandName": "Project",
+      "environmentVariables": {
         "DOTNET_ENVIRONMENT": "Development"
       }
     }

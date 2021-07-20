@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Formatting.Compact;
@@ -43,7 +44,14 @@ namespace HostBuilderDemo
                {
                   config.WriteTo.Async(sinkConfig => sinkConfig.Console(new RenderedCompactJsonFormatter()));
                }
-            });
+            })
+            .ConfigureServices((hostContext, services) =>
+            {
+               services
+                  .Configure<Settings>(hostContext.Configuration)
+                  .Configure<WorkerSettings>(hostContext.Configuration.GetSection("WorkerSettings"))
+                  .AddHostedService<Worker>();
+            }); 
       }
    }
 }
